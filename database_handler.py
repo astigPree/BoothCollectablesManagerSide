@@ -88,7 +88,7 @@ def consoleWindow(filename=None, table=None) :
 
     # Events
     cols = ("ID", "User", "Total", "SS", "S+", "S ", "A+", "A ", "B+", "B ", "C ")
-    activities = ("add", "update", "check", "close")
+    activities = ("add", "update", "check", "users" ,"close")
     while True :
         print("=" * 40)
         print("List of Activities : ")
@@ -102,7 +102,7 @@ def consoleWindow(filename=None, table=None) :
             continue
 
         activity = int(activity)
-        if activity < 1 or activity > 4 :
+        if activity < 1 or activity > 5 :
             print(f"[!] The Activity is not in the list : {activity}")
             continue
 
@@ -133,6 +133,16 @@ def consoleWindow(filename=None, table=None) :
                 print("Information : ")
                 for i, info in enumerate(information) :
                     print(f"    {cols[i]} : {info}")
+        elif activity == 4:
+            print(" Check Users ".center(40, '-'))
+            users = sorted(controller.getListOfUser())
+            start = ""
+            for user in users :
+                if start != user[0] :
+                    start = user[0]
+                    print(f"{start.upper()} :")
+                print(f"   - {user}")
+            print(f"\nTotal Users : {len(users)}")
         else :
             controller.close()
             print(f"[?] The Program is closed !!! ")
@@ -144,3 +154,5 @@ def consoleWindow(filename=None, table=None) :
 
 if __name__ == "__main__" :
     consoleWindow()
+
+
